@@ -1,0 +1,46 @@
+name: dream_al_emarat_app
+description: "A new Flutter project."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.7.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+  provider: ^6.1.2
+  http: ^1.3.0
+  shared_preferences: ^2.5.2
+  webview_flutter: ^4.10.0
+  image_picker: ^1.1.2
+  webview_flutter_wkwebview: ^3.18.4
+  file_picker: ^9.0.2
+  permission_handler: ^11.4.0
+  change_app_package_name: ^1.5.0
+  flutter_launcher_icons: ^0.14.3
+  pull_to_refresh: ^2.0.0
+  firebase_core: ^3.12.1
+  firebase_messaging: ^15.2.4
+  flutter_inappwebview: ^6.0.0
+  flutter_local_notifications: ^18.0.1
+  url_launcher: ^6.3.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/logo.png"

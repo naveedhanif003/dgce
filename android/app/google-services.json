@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "200487839861",
+    "project_id": "dgce-push-notifications",
+    "storage_bucket": "dgce-push-notifications.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:200487839861:android:f911a4e38629724ac0703c",
+        "android_client_info": {
+          "package_name": "co.dgce.customer"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCREvHHgN_5ObPIYVcXCZy0Nhe9cKSluhU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
