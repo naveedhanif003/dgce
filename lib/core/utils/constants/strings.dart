@@ -14,7 +14,7 @@ class AppStrings {
   static const String password = "Password";
   static const String last_name = "Last Name";
   static const String first_name = "First Name";
-  static const String signup_des = "Welcome to Dream AL Emarat LLC FZ";
+  static const String signup_des = "Welcome to DGCE";
   static const String terms_and_conditions = "Accept the Terms and Conditions and Privacy Policy";
   static const String enter_email = "Please Enter Your Email";
   static const String remember_password = "If you Reminder Your Password ";

@@ -5,8 +5,8 @@ import 'package:flutter/foundation.dart';
 import '../utils/helpers/apiException.dart'; // For debugging logs
 
 class NetworkApiService {
-  final String baseUrl = "https://test.dhinvest.ae"; // Replace with your API base URL
-  // final String baseUrl = "https://dgce.co"; // Replace with your API base URL
+  // final String baseUrl = "https://test.dhinvest.ae"; // Replace with your API base URL
+  final String baseUrl = "https://dgce.co"; // Replace with your API base URL
 
   /// Generic Function for GET Requests
   Future<dynamic> getRequest(

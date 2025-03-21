@@ -135,7 +135,7 @@ class _LoginScreen extends State<LoginScreen> {
                             ),
                             TextButton(
                               onPressed: () {
-                                Navigator.pushReplacementNamed(
+                                Navigator.pushNamed(
                                   context,
                                   RoutesNames.forgotScreen,
                                 );
@@ -171,7 +171,7 @@ class _LoginScreen extends State<LoginScreen> {
                             recognizer:
                                 TapGestureRecognizer()
                                   ..onTap = () {
-                                    Navigator.pushReplacementNamed(
+                                    Navigator.pushNamed(
                                       context,
                                       RoutesNames.signUp,
                                     );

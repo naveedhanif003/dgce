@@ -6,19 +6,21 @@
 
 class NavbarLinks {
   NavbarLinks({
-      this.slug, 
-      this.title, 
-      this.link, 
-      this.method, 
-      this.type,});
+    this.slug,
+    this.title,
+    this.link,
+    this.method,
+    this.type,
+  });
 
   NavbarLinks.fromJson(dynamic json) {
-    slug = json['slug'];
-    title = json['title'];
-    link = json['link'];
-    method = json['method'];
-    type = json['type'];
+    slug = json['slug'] as String?;
+    title = json['title'] as String?;
+    link = json['link'] as String?;
+    method = json['method'] as String?;
+    type = json['type'] as String?;
   }
+
   String? slug;
   String? title;
   String? link;
@@ -26,13 +28,12 @@ class NavbarLinks {
   String? type;
 
   Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['slug'] = slug;
-    map['title'] = title;
-    map['link'] = link;
-    map['method'] = method;
-    map['type'] = type;
-    return map;
+    return {
+      if (slug != null) 'slug': slug,
+      if (title != null) 'title': title,
+      if (link != null) 'link': link,
+      if (method != null) 'method': method,
+      if (type != null) 'type': type,
+    };
   }
-
 }

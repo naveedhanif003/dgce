@@ -1,5 +1,6 @@
 import 'package:dream_al_emarat_app/apis_response/setting_api_response/SettingApiResponse.dart';
 import 'package:dream_al_emarat_app/core/utils/Utils.dart';
+import 'package:dream_al_emarat_app/core/utils/constants/colors.dart';
 import 'package:dream_al_emarat_app/core/utils/dialogs/showCustomDialog.dart';
 import 'package:dream_al_emarat_app/routes/routes_names.dart';
 import 'package:dream_al_emarat_app/views/login_screen.dart';
@@ -33,21 +34,24 @@ class _SplashScreenState extends State<SplashScreen> {
     String? accessToken = await SharedPrefHelper().getData<String>(
       "access_token",
     );
-    String? fcmToken = await SharedPrefHelper().getData<String>(
-      "fcm_token",
-    );
+    String? fcmToken = await SharedPrefHelper().getData<String>("fcm_token");
     final params = {
-      "fcm_token": fcmToken?? "fcm_token not found",
+      "fcm_token": fcmToken ?? "fcm_token not found",
       "user_type": "customer",
       "fcm_token_type": "customer", // nullable, in:customer,guest
       "access_token": accessToken ?? "",
     };
     await settingsViewModel.fetchSettings(params);
+
+
     print(
       "API Response: ${settingsViewModel.settings?.message}    ${settingsViewModel.settings?.data?.isAccessTokenValid!}",
     );
     if (settingsViewModel.status == Status.ERROR) {
-      showCustomDialog(context: context, message: settingsViewModel.errorMessage!!);
+      showCustomDialog(
+        context: context,
+        message: settingsViewModel.errorMessage!!,
+      );
       print("Setting Error Message ${settingsViewModel.errorMessage}");
     }
 
@@ -67,10 +71,30 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
             Center(
-              child: Image.asset(
-                "assets/images/logo.png",
-                width: 150,
-                height: 150,
+              child: Column(mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    "assets/images/logo.png",
+                    width: 150,
+                    height: 150,
+                  ),
+                  Text(
+                    "DGCE FOR GOLD & PRECIOUS METAL",
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white,
+                    ),
+                  ),Text(
+                    "PRODUCTS MANUFACTURING CO.L.L.C",
+                    style: TextStyle(
+                      fontSize: 8,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
               ),
               // settingsViewModel.status == Status.LOADING
               //     ? CircularProgressIndicator(color: Colors.white)

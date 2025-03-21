@@ -187,7 +187,7 @@ class _ForgetPassScreen extends State<ForgetPassScreen> {
           positiveText: "Ok",
           onPositivePressed: () {
             Navigator.pop(context);
-            Navigator.pushReplacementNamed(context, RoutesNames.resetPassword);
+            Navigator.pushNamed(context, RoutesNames.resetPassword);
           },
         );
       }

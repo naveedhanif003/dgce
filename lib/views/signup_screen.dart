@@ -1,3 +1,4 @@
+import 'package:dream_al_emarat_app/apis_response/setting_api_response/NavbarLinks.dart';
 import 'package:dream_al_emarat_app/core/utils/constants/colors.dart';
 import 'package:dream_al_emarat_app/core/utils/constants/strings.dart';
 import 'package:dream_al_emarat_app/routes/routes_names.dart';
@@ -35,10 +36,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     final signUpViewModel = Provider.of<SignUpViewModel>(context);
+
     final settingsViewModel = Provider.of<SettingsViewModel>(
       context,
       listen: false,
     );
+
+    var privacyPolicyLink = settingsViewModel.settings?.data?.pages?.navbarLinks
+        ?.firstWhere((link) => link.slug == "privacy_policy", orElse: () => NavbarLinks())
+        ?.link; // Extract the link property
+
+    var termsConditionLink = settingsViewModel.settings?.data?.pages?.navbarLinks
+        ?.firstWhere((link) => link.slug == "terms_condition", orElse: () => NavbarLinks())
+        ?.link;
     return Scaffold(
       body: SafeArea(
         child: LayoutBuilder(
@@ -60,7 +70,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: Form(
                         key: _formKey,
                         child: Column(
-
                           children: [
                             SizedBox(height: 20),
                             Center(
@@ -161,9 +170,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 ),
                                 InkWell(
                                   onTap: () {
-                                    _launchUrl(
-                                      "https://test.dhinvest.ae/term-condition?is_httpClient=1",
-                                    );
+                                    _launchUrl(termsConditionLink);
                                   },
                                   child: Text(
                                     "Terms&Condition",
@@ -184,9 +191,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 ),
                                 InkWell(
                                   onTap: () {
-                                    _launchUrl(
-                                      "https://test.dhinvest.ae/privacy-policy?is_httpClient=1",
-                                    );
+                                    _launchUrl(privacyPolicyLink);
                                   },
                                   child: Text(
                                     "Privacy Policy",

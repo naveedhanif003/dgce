@@ -135,24 +135,7 @@ class _ResetPasswordScreen extends State<ResetPasswordScreen> {
                                             ),
                                   ),
                                 ),
-                                SizedBox(height: 10),
-                                InkWell(
-                                  onTap: () {
-                                    Navigator.pushReplacementNamed(
-                                      context,
-                                      RoutesNames.signIn,
-                                    );
-                                  },
-                                  child: Text(
-                                    "Go to Login",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      decoration:
-                                          TextDecoration
-                                              .underline, // Optional for styling
-                                    ),
-                                  ),
-                                ),
+
                               ],
                             );
                           },
@@ -183,7 +166,11 @@ class _ResetPasswordScreen extends State<ResetPasswordScreen> {
 
       if (resetViewModel.status == Status.COMPLETE) {
         if (resetViewModel.reset?.success == true) {
-          Navigator.pushReplacementNamed(context, RoutesNames.signIn);
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            RoutesNames.signIn, // Using named routes
+                (Route<dynamic> route) => false, // Clears all previous screens
+          );
         }
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
