@@ -40,6 +40,29 @@ android {
             signingConfig = signingConfigs.getByName("debug")
         }
     }
+
+    flavorDimensions.add("flavor-type")
+    productFlavors {
+        create("staging") {
+            dimension = "flavor-type"
+            applicationIdSuffix = ".staging"
+            versionNameSuffix = "-staging"
+        }
+        create("production") {
+            dimension = "flavor-type"
+        }
+    }
+
+//    productFlavors {
+//        staging{
+//            dimension "flavor-type"
+//            applicationIdSuffix ".staging"
+//            versionNameSuffix "-staging"
+//        }
+//        production{
+//            dimension "flavor-type"
+//        }
+//    }
 }
 
 flutter {

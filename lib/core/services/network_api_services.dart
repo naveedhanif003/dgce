@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:dream_al_emarat_app/AppConfig.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
 
@@ -6,8 +7,8 @@ import '../utils/helpers/apiException.dart'; // For debugging logs
 
 class NetworkApiService {
   // final String baseUrl = "https://test.dhinvest.ae"; // Replace with your API base URL
-  final String baseUrl = "https://dgce.co"; // Replace with your API base URL
-
+  // final String baseUrl = "https://dgce.co"; // Replace with your API base URL
+  final String baseUrl = AppConfig.baseUrl;
   /// Generic Function for GET Requests
   Future<dynamic> getRequest(
       String endpoint, {

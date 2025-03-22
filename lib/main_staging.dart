@@ -18,7 +18,8 @@ import 'AppConfig.dart';
 import 'core/utils/helpers/shared_pref_helper.dart';
 import 'firebase_options.dart';
 import 'package:provider/provider.dart';
-import 'package:dream_al_emarat_app/main.dart';
+import 'package:dream_al_emarat_app/main_staging.dart';
+
 /// Global key for navigation
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -61,7 +62,7 @@ Future<void> showNotification(RemoteMessage message) async {
 }
 
 void main() async {
-  AppConfig.appFlavor = Flavor.production;
+  AppConfig.appFlavor = Flavor.staging;
   WidgetsFlutterBinding.ensureInitialized();
 
 
