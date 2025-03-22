@@ -1,6 +1,7 @@
 import 'package:dream_al_emarat_app/routes/routes_names.dart';
 import 'package:dream_al_emarat_app/views/HomeScreen.dart';
 import 'package:dream_al_emarat_app/views/OtpScreen.dart';
+import 'package:dream_al_emarat_app/views/WebViewScreen.dart';
 import 'package:dream_al_emarat_app/views/forgot_screen.dart';
 import 'package:dream_al_emarat_app/views/login_screen.dart';
 import 'package:dream_al_emarat_app/views/onBoardingScreens.dart';
@@ -31,6 +32,15 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => ResetPasswordScreen());
       case RoutesNames.otpPassword:
         return MaterialPageRoute(builder: (_) => OtpScreen());
+      case RoutesNames.webviewScreen:
+        final args = settings.arguments as Map<String, dynamic>?;
+        return MaterialPageRoute(
+          builder:
+              (_) => WebViewScreen(
+                url: args?['url'] ?? "",
+                title: args?['title'] ?? "",
+              ),
+        );
       default:
         return MaterialPageRoute(
           builder: (_) {

@@ -7,4 +7,5 @@ class RoutesNames{
   static const String onBoardingScreens = 'on_boarding_screens';
   static const String resetPassword = 'reset_password_screen';
   static const String otpPassword = 'otp_screen';
+  static const String webviewScreen = 'webview_screen';
 }

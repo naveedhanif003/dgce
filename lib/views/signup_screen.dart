@@ -42,13 +42,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
       listen: false,
     );
 
-    var privacyPolicyLink = settingsViewModel.settings?.data?.pages?.navbarLinks
-        ?.firstWhere((link) => link.slug == "privacy_policy", orElse: () => NavbarLinks())
-        ?.link; // Extract the link property
+    var privacyPolicyLink =
+        settingsViewModel.settings?.data?.pages?.navbarLinks
+            ?.firstWhere(
+              (link) => link.slug == "privacy_policy",
+              orElse: () => NavbarLinks(),
+            )
+            ?.link; // Extract the link property
 
-    var termsConditionLink = settingsViewModel.settings?.data?.pages?.navbarLinks
-        ?.firstWhere((link) => link.slug == "terms_condition", orElse: () => NavbarLinks())
-        ?.link;
+    var termsConditionLink =
+        settingsViewModel.settings?.data?.pages?.navbarLinks
+            ?.firstWhere(
+              (link) => link.slug == "terms_condition",
+              orElse: () => NavbarLinks(),
+            )
+            ?.link;
     return Scaffold(
       body: SafeArea(
         child: LayoutBuilder(
@@ -147,73 +155,102 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   (value) => Utils.validatePassword(value),
                             ),
                             Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                IconButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      _isChecked = !_isChecked;
-                                    });
-                                  },
-                                  icon: Icon(
-                                    _isChecked
-                                        ? Icons.check_box
-                                        : Icons.check_box_outline_blank,
-                                    color: AppColors.goldColor,
-                                  ),
-                                ),
-                                Text(
-                                  "Accept the ",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 12,
-                                  ),
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    _launchUrl(termsConditionLink);
-                                  },
-                                  child: Text(
-                                    "Terms&Condition",
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.white,
-                                      decoration: TextDecoration.underline,
-                                      decorationColor: Colors.white,
+                                Padding(
+                                  padding: EdgeInsets.only(top: 10),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        _isChecked = !_isChecked;
+                                      });
+                                    },
+                                    child: Icon(
+                                      _isChecked
+                                          ? Icons.check_box
+                                          : Icons.check_box_outline_blank,
+                                      color: AppColors.goldColor,
+                                      size: 24,
                                     ),
                                   ),
                                 ),
-                                Text(
-                                  " and ",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 12,
-                                  ),
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    _launchUrl(privacyPolicyLink);
-                                  },
-                                  child: Text(
-                                    "Privacy Policy",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      decoration: TextDecoration.underline,
-                                      decorationColor: Colors.white,
-                                      fontSize: 12,
+                                SizedBox(width: 5),
+                                Expanded(
+                                  child: Padding(padding: EdgeInsets.only(left: 2,right: 5,top: 10, bottom: 10),child:
+                                  Text.rich(
+                                    TextSpan(
+                                      children: [
+                                        TextSpan(
+                                          text: "Accept the ",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                        WidgetSpan(
+                                          child: GestureDetector(
+                                            onTap:
+                                                () => Navigator.pushNamed(
+                                              context,
+                                              RoutesNames.webviewScreen,
+                                              arguments: {
+                                                "url": termsConditionLink,
+                                                "title":
+                                                "Terms And Conditions",
+                                              },
+                                            ),
+
+                                            child: Text(
+                                              "Terms & Conditions",
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                color: Colors.white,
+                                                decoration:
+                                                TextDecoration.underline,
+                                                decorationColor: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        TextSpan(
+                                          text: " and ",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                        WidgetSpan(
+                                          child: GestureDetector(
+                                            onTap:
+                                                () => Navigator.pushNamed(
+                                              context,
+                                              RoutesNames.webviewScreen,
+                                              arguments: {
+                                                "url": privacyPolicyLink,
+                                                "title":
+                                                "Privacy Policy",
+                                              },
+                                            ),
+                                            child: Text(
+                                              "Privacy Policy",
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                color: Colors.white,
+                                                decoration:
+                                                TextDecoration.underline,
+                                                decorationColor: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ),
+                                  ),)
+                                  ,
                                 ),
-                                // Expanded(
-                                //   child: Text(
-                                //     AppStrings.terms_and_conditions,
-                                //     style: TextStyle(
-                                //       color: Colors.white,
-                                //       fontSize: 10,
-                                //     ),
-                                //   ),
-                                // ),
                               ],
                             ),
+
                             SizedBox(
                               width: double.infinity,
                               child: ElevatedButton(
@@ -270,39 +307,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 ],
                               ),
                             ),
-                            // SizedBox(height: 10),
-                            // Row(
-                            //   mainAxisAlignment: MainAxisAlignment.center,
-                            //   children: [
-                            //     InkWell(
-                            //       onTap: () {
-                            //         _launchUrl("https://test.dhinvest.ae/term-condition?is_httpClient=1");
-                            //       },
-                            //       child: Text(
-                            //         "Terms&Condition",
-                            //         style: TextStyle(
-                            //           color: Colors.white,
-                            //           decoration: TextDecoration.underline,
-                            //           decorationColor: Colors.white,
-                            //         ),
-                            //       ),
-                            //     ),
-                            //     Text("/",style: TextStyle(color: Colors.white),),
-                            //     InkWell(
-                            //       onTap: () {
-                            //         _launchUrl("https://test.dhinvest.ae/privacy-policy?is_httpClient=1");
-                            //       },
-                            //       child: Text(
-                            //         "Privacy Policy",
-                            //         style: TextStyle(
-                            //           color: Colors.white,
-                            //           decoration: TextDecoration.underline,
-                            //           decorationColor: Colors.white,
-                            //         ),
-                            //       ),
-                            //     ),
-                            //   ],
-                            // ),
                             SizedBox(height: 15),
                           ],
                         ),

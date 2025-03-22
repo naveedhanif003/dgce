@@ -1,3 +1,4 @@
+import 'package:dream_al_emarat_app/core/utils/constants/colors.dart';
 import 'package:dream_al_emarat_app/routes/app_routes.dart';
 import 'package:dream_al_emarat_app/routes/routes_names.dart';
 import 'package:dream_al_emarat_app/viewmodels/forgot_view_model.dart';
@@ -10,6 +11,7 @@ import 'package:dream_al_emarat_app/viewmodels/signup_view_model.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'core/utils/helpers/shared_pref_helper.dart';
@@ -59,6 +61,13 @@ Future<void> showNotification(RemoteMessage message) async {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarColor: AppColors.goldColor, // Set the status bar color
+    statusBarIconBrightness: Brightness.light, // Icons will be white
+  ));
+
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   FirebaseMessaging messaging = FirebaseMessaging.instance;

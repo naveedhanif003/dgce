@@ -82,6 +82,8 @@ class _OtpScreenState extends State<OtpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double boxSize = (screenWidth - 80) / otpLength;
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -98,7 +100,10 @@ class _OtpScreenState extends State<OtpScreen> {
                 children: [
                   SizedBox(height: 50),
                   Center(
-                    child: Image.asset("assets/images/logo.png", height: 120),
+                    child: Image.asset(
+                      "assets/images/logo.png",
+                      height: 120,
+                    ),
                   ),
                   SizedBox(height: 20),
                   Text(
@@ -114,7 +119,7 @@ class _OtpScreenState extends State<OtpScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: List.generate(
                       otpLength,
-                      (index) => _buildOtpBox(index),
+                          (index) => _buildOtpBox(index, boxSize),
                     ),
                   ),
                   SizedBox(height: 30),
@@ -122,90 +127,92 @@ class _OtpScreenState extends State<OtpScreen> {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed:
-                          (isOtpFilled && !isLoading) ? _submitOtp : () {},
+                      (isOtpFilled && !isLoading) ? _submitOtp : () {},
                       style: ElevatedButton.styleFrom(
                         backgroundColor:
-                            isOtpFilled ? AppColors.goldColor : Colors.grey,
+                        isOtpFilled ? AppColors.goldColor : Colors.grey,
                         padding: EdgeInsets.symmetric(vertical: 8),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5),
                         ),
                       ),
                       child:
-                          isLoading
-                              ? SizedBox(
-                                width: 20,
-                                height: 20,
-                                child: CircularProgressIndicator(
-                                  color: Colors.black,
-                                  strokeWidth: 2,
-                                ),
-                              ) // Loader for OTP verification
-                              : Text(
-                                AppStrings.verify_otp,
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                ),
-                              ),
+                      isLoading
+                          ? SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(
+                          color: Colors.black,
+                          strokeWidth: 2,
+                        ),
+                      ) // Loader for OTP verification
+                          : Text(
+                        AppStrings.verify_otp,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
                     ),
                   ),
                   SizedBox(height: 10),
                   InkWell(
                     onTap:
-                        isResendEmailLoading
-                            ? null
-                            : () {
-                              setState(() {
-                                isResendEmailLoading = true; // Show resend loader
-                              });
-                              _resendEmailCode(context);
-                            },
+                    isResendEmailLoading
+                        ? null
+                        : () {
+                      setState(() {
+                        isResendEmailLoading =
+                        true; // Show resend loader
+                      });
+                      _resendEmailCode(context);
+                    },
                     child: Container(
                       padding: EdgeInsets.all(12),
                       child:
-                          isResendEmailLoading
-                              ? SizedBox(
-                                width: 20,
-                                height: 20,
-                                child: CircularProgressIndicator(
-                                  color: Colors.white,
-                                  strokeWidth: 2,
-                                ),
-                              ) // Loader for Resend button
-                              : Text(
-                                "Resend Code on email",
-                                style: TextStyle(color: Colors.white),
-                              ),
+                      isResendEmailLoading
+                          ? SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                          strokeWidth: 2,
+                        ),
+                      ) // Loader for Resend button
+                          : Text(
+                        "Resend Code on email",
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
                   ),
                   InkWell(
                     onTap:
-                        isResendPhoneLoading
-                            ? null
-                            : () {
-                              setState(() {
-                                isResendPhoneLoading = true; // Show resend loader
-                              });
-                              _resendPhoneCode(context);
-                            },
+                    isResendPhoneLoading
+                        ? null
+                        : () {
+                      setState(() {
+                        isResendPhoneLoading =
+                        true; // Show resend loader
+                      });
+                      _resendPhoneCode(context);
+                    },
                     child: Container(
                       padding: EdgeInsets.all(12),
                       child:
-                          isResendPhoneLoading
-                              ? SizedBox(
-                                width: 20,
-                                height: 20,
-                                child: CircularProgressIndicator(
-                                  color: Colors.white,
-                                  strokeWidth: 2,
-                                ),
-                              ) // Loader for Resend button
-                              : Text(
-                                "Resend Code on phone",
-                                style: TextStyle(color: Colors.white),
-                              ),
+                      isResendPhoneLoading
+                          ? SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                          strokeWidth: 2,
+                        ),
+                      ) // Loader for Resend button
+                          : Text(
+                        "Resend Code on phone",
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
                   ),
                 ],
@@ -213,8 +220,8 @@ class _OtpScreenState extends State<OtpScreen> {
             ),
           ],
         ),
-      ),
-    );
+        ),
+      );
   }
 
   void _otpVerify(BuildContext context, String otp) async {
@@ -260,7 +267,9 @@ class _OtpScreenState extends State<OtpScreen> {
       String? accessToken = await SharedPrefHelper().getData<String>(
         "access_token",
       );
-      String? email = await SharedPrefHelper().getData<String>(Utils.user_email);
+      String? email = await SharedPrefHelper().getData<String>(
+        Utils.user_email,
+      );
 
       if (email == null || accessToken == null) {
         throw Exception("Missing email or access token");
@@ -271,19 +280,21 @@ class _OtpScreenState extends State<OtpScreen> {
       await otpViewModel.resendEmailCode(otpData);
 
       if (otpViewModel.status == Status.COMPLETE) {
-        if(otpViewModel.resend?.success==true){
+        if (otpViewModel.resend?.success == true) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(otpViewModel.resend?.message ?? "Code not sent"),
               backgroundColor: Colors.green,
             ),
           );
-        }else{
+        } else {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(otpViewModel.resend?.message ?? "Code not sent"), backgroundColor: Colors.red),
+            SnackBar(
+              content: Text(otpViewModel.resend?.message ?? "Code not sent"),
+              backgroundColor: Colors.red,
+            ),
           );
         }
-
       } else {
         throw Exception(otpViewModel.errorMessage ?? "Something went wrong");
       }
@@ -301,7 +312,6 @@ class _OtpScreenState extends State<OtpScreen> {
     }
   }
 
-
   void _resendPhoneCode(BuildContext context) async {
     final otpViewModel = Provider.of<OTPViewModel>(context, listen: false);
 
@@ -309,7 +319,9 @@ class _OtpScreenState extends State<OtpScreen> {
       String? accessToken = await SharedPrefHelper().getData<String>(
         "access_token",
       );
-      String? phone = await SharedPrefHelper().getData<String>(Utils.user_phone);
+      String? phone = await SharedPrefHelper().getData<String>(
+        Utils.user_phone,
+      );
 
       if (phone == null || accessToken == null) {
         throw Exception("Missing email or access token");
@@ -320,19 +332,21 @@ class _OtpScreenState extends State<OtpScreen> {
       await otpViewModel.resendPhoneCode(otpData);
 
       if (otpViewModel.status == Status.COMPLETE) {
-        if(otpViewModel.resend?.success==true){
+        if (otpViewModel.resend?.success == true) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(otpViewModel.resend?.message ?? "Code not sent"),
               backgroundColor: Colors.green,
             ),
           );
-        }else{
+        } else {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(otpViewModel.resend?.message ?? "Code not sent"), backgroundColor: Colors.red),
+            SnackBar(
+              content: Text(otpViewModel.resend?.message ?? "Code not sent"),
+              backgroundColor: Colors.red,
+            ),
           );
         }
-
       } else {
         throw Exception(otpViewModel.errorMessage ?? "Something went wrong");
       }
@@ -350,32 +364,71 @@ class _OtpScreenState extends State<OtpScreen> {
     }
   }
 
-  Widget _buildOtpBox(int index) {
+  // Widget _buildOtpBox(int index) {
+  //   return Container(
+  //     width: 50,
+  //     height: 50,
+  //     alignment: Alignment.center,
+  //     decoration: BoxDecoration(
+  //       border: Border.all(color: AppColors.goldColor, width: 2),
+  //       borderRadius: BorderRadius.circular(8),
+  //     ),
+  //     child: TextField(
+  //       controller: controllers[index],
+  //       focusNode: focusNodes[index],
+  //       cursorColor: Colors.white,
+  //       keyboardType: TextInputType.number,
+  //       textAlign: TextAlign.center,
+  //       maxLength: 1,
+  //       style: TextStyle(
+  //         fontSize: 20,
+  //         fontWeight: FontWeight.bold,
+  //         color: Colors.white,
+  //       ),
+  //       decoration: InputDecoration(counterText: "", border: InputBorder.none),
+  //       onChanged: (value) => _onOtpChanged(index, value),
+  //       onSubmitted: (_) => _submitOtp(),
+  //       onEditingComplete: () => FocusScope.of(context).nextFocus(),
+  //     ),
+  //   );
+  // }
+
+  Widget _buildOtpBox(int index, double boxSize) {
     return Container(
-      width: 50,
-      height: 50,
-      alignment: Alignment.center,
+      width: boxSize,
+      height: boxSize,
+      alignment: Alignment.center, // Ensures the container aligns content centrally
       decoration: BoxDecoration(
         border: Border.all(color: AppColors.goldColor, width: 2),
         borderRadius: BorderRadius.circular(8),
       ),
-      child: TextField(
-        controller: controllers[index],
-        focusNode: focusNodes[index],
-        cursorColor: Colors.white,
-        keyboardType: TextInputType.number,
-        textAlign: TextAlign.center,
-        maxLength: 1,
-        style: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
-          color: Colors.white,
+      child: Center( // Ensures the text field is centered
+        child: TextField(
+          controller: controllers[index],
+          focusNode: focusNodes[index],
+          cursorColor: Colors.white,
+          keyboardType: TextInputType.number,
+          textAlign: TextAlign.center, // Center text horizontally
+          textAlignVertical: TextAlignVertical.center, // Center text vertically
+          maxLength: 1,
+          style: TextStyle(
+            fontSize: boxSize * 0.5, // Adjust font size dynamically
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+            height: 1.0, // Ensures proper text centering
+          ),
+          decoration: InputDecoration(
+            counterText: "",
+            border: InputBorder.none,
+            isDense: true, // Removes extra padding
+            contentPadding: EdgeInsets.zero, // Removes unnecessary padding
+          ),
+          onChanged: (value) => _onOtpChanged(index, value),
+          onSubmitted: (_) => _submitOtp(),
+          onEditingComplete: () => FocusScope.of(context).nextFocus(),
         ),
-        decoration: InputDecoration(counterText: "", border: InputBorder.none),
-        onChanged: (value) => _onOtpChanged(index, value),
-        onSubmitted: (_) => _submitOtp(),
-        onEditingComplete: () => FocusScope.of(context).nextFocus(),
       ),
     );
   }
+
 }
