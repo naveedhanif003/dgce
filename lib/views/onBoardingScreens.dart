@@ -165,7 +165,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
 class OnboardingContent extends StatelessWidget {
   final String image, title;
-  final List<String> subtitle; // Change subtitle type to List<String>
+  final List<String> subtitle;
 
   const OnboardingContent({
     required this.image,
@@ -184,7 +184,7 @@ class OnboardingContent extends StatelessWidget {
           title,
           textAlign: TextAlign.center,
           style: TextStyle(
-            fontSize: 22,
+            fontSize: 15,
             fontWeight: FontWeight.w600,
             color: AppColors.goldColor,
           ),
@@ -193,22 +193,23 @@ class OnboardingContent extends StatelessWidget {
         Container(
           margin: EdgeInsets.all(20),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: subtitle.map((point) {
               return Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
+                padding: const EdgeInsets.only(bottom: 8.0, left: 16.0), // Add left padding
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    SizedBox(width: 10), // Add spacing before the bullet point
                     Text(
-                      "• ", // Bullet point
+                      "• ",
                       style: TextStyle(fontSize: 16, color: Colors.white),
                     ),
                     Expanded(
                       child: Text(
                         point,
                         textAlign: TextAlign.left,
-                        style: TextStyle(fontSize: 16, color: Colors.white),
+                        style: TextStyle(fontSize: 12, color: Colors.white),
                       ),
                     ),
                   ],
@@ -221,4 +222,6 @@ class OnboardingContent extends StatelessWidget {
     );
   }
 }
+
+
 
